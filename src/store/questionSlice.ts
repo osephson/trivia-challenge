@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 
-import { IQuestion, IResponse } from '../interfaces';
+import { IQuestion, IQResponse } from '../interfaces';
 
 import { getQuestions } from '../api';
 
@@ -25,7 +25,7 @@ const initialState: QuestionState = {
 export const fetchQuestions = createAsyncThunk(
   'questions/fetchAll',
   async () => {
-    const response: IResponse = await getQuestions();
+    const response: IQResponse = await getQuestions();
     return response.results;
   }
 );

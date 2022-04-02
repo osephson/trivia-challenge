@@ -4,7 +4,7 @@ export interface IQuestion {
   correct_answer: 'True' | 'False';
 }
 
-export interface IResponse {
+export interface IQResponse {
   response_code: number;
   results: IQuestion[];
 }
