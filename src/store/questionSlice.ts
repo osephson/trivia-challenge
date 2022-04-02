@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 
-import { IQuestion } from '../interfaces';
+import { IQuestion, IResponse } from '../interfaces';
 
 import { getQuestions } from '../api';
 
@@ -8,19 +8,25 @@ export interface QuestionState {
   questions: IQuestion[];
   loading: boolean;
   results: boolean[];
+  errors: {
+    msg: string;
+  };
 }
 
 const initialState: QuestionState = {
   questions: [],
-  loading: true,
+  loading: false,
   results: [],
+  errors: {
+    msg: '',
+  },
 };
 
 export const fetchQuestions = createAsyncThunk(
   'questions/fetchAll',
   async () => {
-    const response: any = await getQuestions();
-    return response.data;
+    const response: IResponse = await getQuestions();
+    return response.results;
   }
 );
 
@@ -47,7 +53,13 @@ const questionSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchQuestions.pending, (state) => {
-      return { ...state, loading: true, questions: [], results: [] };
+      return {
+        ...state,
+        loading: true,
+        questions: [],
+        results: [],
+        errors: { msg: '' },
+      };
     });
     builder.addCase(fetchQuestions.fulfilled, (state, { payload }) => {
       return {
@@ -55,10 +67,17 @@ const questionSlice = createSlice({
         loading: false,
         questions: payload,
         results: Array(payload.length).fill(false),
+        errors: { msg: '' },
       };
     });
     builder.addCase(fetchQuestions.rejected, (state) => {
-      return { ...state, loading: false, questions: [], results: [] };
+      return {
+        ...state,
+        loading: false,
+        questions: [],
+        results: [],
+        errors: { msg: 'Something went wrong!' },
+      };
     });
   },
 });

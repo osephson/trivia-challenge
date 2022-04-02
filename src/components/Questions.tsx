@@ -10,7 +10,7 @@ const Questions = (): JSX.Element => {
   let navigate = useNavigate();
   let dispatch = useDispatch();
 
-  const { questions, loading } = useSelector(
+  const { questions, loading, errors } = useSelector(
     (state: RootState) => state.question
   );
 
@@ -31,40 +31,60 @@ const Questions = (): JSX.Element => {
   return (
     <main className='questions'>
       {!loading ? (
-        questions.length ? (
-          <div>
-            <h1 className='mb-5'>{questions[index].category}</h1>
-            <div className='q-question d-flex align-items-center'>
-              <span
-                dangerouslySetInnerHTML={{ __html: questions[index].question }}
-              ></span>
-            </div>
-            <div className='my-3'>
-              {index + 1} of {questions.length}
-            </div>
+        !errors.msg ? (
+          questions.length ? (
             <div>
-              <Button
-                variant='primary'
-                className='mx-3'
-                size='lg'
-                onClick={() => onAns(true)}
-              >
-                Yes
-              </Button>
-              <Button
-                variant='danger'
-                className='mx-3'
-                size='lg'
-                onClick={() => onAns(false)}
-              >
-                No
-              </Button>
+              <h1 className='mb-5'>{questions[index].category}</h1>
+              <div className='q-question d-flex align-items-center'>
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: questions[index].question,
+                  }}
+                ></span>
+              </div>
+              <div className='my-3'>
+                {index + 1} of {questions.length}
+              </div>
+              <div>
+                <Button
+                  variant='primary'
+                  className='mx-3'
+                  size='lg'
+                  onClick={() => onAns(true)}
+                >
+                  Yes
+                </Button>
+                <Button
+                  variant='danger'
+                  className='mx-3'
+                  size='lg'
+                  onClick={() => onAns(false)}
+                >
+                  No
+                </Button>
+              </div>
             </div>
-          </div>
+          ) : (
+            <>
+              <h3>Nothing to display</h3>
+              <Link to='/'>GO HOME!</Link>
+            </>
+          )
         ) : (
           <>
-            <h3>Nothing to display</h3>
-            <Link to='/'>GO HOME!</Link>
+            <h3>{errors.msg}</h3>
+            <div className='d-flex'>
+              <Link
+                to='#'
+                onClick={() => {
+                  dispatch(fetchQuestions());
+                }}
+              >
+                Reload
+              </Link>
+              <span className='px-3'>|</span>
+              <Link to='/'>GO HOME</Link>
+            </div>
           </>
         )
       ) : (
