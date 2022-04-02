@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,8 +8,8 @@ import { fetchQuestions, onAnswer } from '../store/questionSlice';
 import { RootState } from '../store';
 
 const Questions = (): JSX.Element => {
-  let navigate = useNavigate();
-  let dispatch = useDispatch();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { questions, loading, errors } = useSelector(
     (state: RootState) => state.question
