@@ -30,7 +30,7 @@ Once you're ready, please visit http://localhost:3000 and enjoy!
 
 ## How to build?
 
-Run `npm build` to build the bundles.
+Run `npm run build` to build the bundles.
 
 ## How to test?
 
