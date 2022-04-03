@@ -19,7 +19,7 @@ const Questions = (): JSX.Element => {
 
   useEffect(() => {
     dispatch(fetchQuestions());
-  }, []);
+  }, [dispatch]);
 
   const onAns = (ans: true | false) => {
     dispatch(onAnswer({ index, ans }));
