@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 
 import { IQuestion, IQResponse } from '../interfaces';
 
-import { getQuestions } from '../api';
+import { getQuestions } from '../services/api';
 
 export interface QuestionState {
   questions: IQuestion[];
