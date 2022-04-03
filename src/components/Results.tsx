@@ -17,7 +17,7 @@ const Results = () => {
         <>
           <div className='mb-5'>
             <h1>You scored</h1>
-            <b>
+            <b data-testid='score'>
               {score} / {results.length}
             </b>
           </div>
@@ -25,7 +25,9 @@ const Results = () => {
           <div>
             {questions.map((q, i) => (
               <div key={i} className='q-result-item d-flex mb-3'>
-                <b className='q-mark'>{results[i] ? '+' : '-'}</b>
+                <b className='q-mark' data-testid={'result-' + i}>
+                  {results[i] ? '+' : '-'}
+                </b>
                 <span dangerouslySetInnerHTML={{ __html: q.question }}></span>
               </div>
             ))}
