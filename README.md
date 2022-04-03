@@ -20,6 +20,8 @@ Answer simple 10 True or False questions, and get the result of it.
 - Run `npm install` to install packages.
 - Create an `.env` file by just copying `.env.example`, and set `REACT_APP_API_URL=<QUIZ_SERVER_URL>`.
 
+  Example. `REACT_APP_API_URL=https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean`
+
 ## How to run?
 
 It's simple, just run `npm start`.
