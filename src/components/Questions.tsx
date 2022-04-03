@@ -34,35 +34,39 @@ const Questions = (): JSX.Element => {
       {!loading ? (
         !errors.msg ? (
           questions.length ? (
-            <div>
-              <h1 className='mb-5'>{questions[index].category}</h1>
-              <div className='q-question d-flex align-items-center'>
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: questions[index].question,
-                  }}
-                ></span>
-              </div>
-              <div className='my-3'>
-                {index + 1} of {questions.length}
+            <div className='main'>
+              <div className='d-flex justify-content-center'>
+                <h1 className='mb-5 align-self-end'>
+                  {questions[index].category}
+                </h1>
               </div>
               <div>
-                <Button
-                  variant='primary'
-                  className='mx-3'
-                  size='lg'
-                  onClick={() => onAns(true)}
-                >
-                  Yes
-                </Button>
-                <Button
-                  variant='danger'
-                  className='mx-3'
-                  size='lg'
-                  onClick={() => onAns(false)}
-                >
-                  No
-                </Button>
+                <div className='q-question d-flex align-items-center'>
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: questions[index].question,
+                    }}></span>
+                </div>
+                <div className='my-3'>
+                  {index + 1} of {questions.length}
+                </div>
+
+                <div>
+                  <Button
+                    variant='primary'
+                    className='mx-3'
+                    size='lg'
+                    onClick={() => onAns(true)}>
+                    Yes
+                  </Button>
+                  <Button
+                    variant='danger'
+                    className='mx-3'
+                    size='lg'
+                    onClick={() => onAns(false)}>
+                    No
+                  </Button>
+                </div>
               </div>
             </div>
           ) : (
@@ -79,8 +83,7 @@ const Questions = (): JSX.Element => {
                 to='#'
                 onClick={() => {
                   dispatch(fetchQuestions());
-                }}
-              >
+                }}>
                 Reload
               </Link>
               <span className='px-3'>|</span>
