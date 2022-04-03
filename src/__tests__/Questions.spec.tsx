@@ -57,7 +57,7 @@ describe('<Questions />', () => {
     expect(screen.getByText('No')).toBeInTheDocument();
   });
 
-  it('should display all quiz and navigate to results page after all is finished', () => {
+  it('should display all quiz, progress and navigate to results page after all is finished', () => {
     const loadedStore = mockStore({
       question: {
         ...initialQState,
@@ -77,9 +77,13 @@ describe('<Questions />', () => {
 
     const yesBtn = screen.getByText(/Yes/i);
     const noBtn = screen.getByText(/No/i);
+    const cntQuestion = mockQuestions.length;
 
-    mockQuestions.forEach((q) => {
+    mockQuestions.forEach((q, i) => {
       expect(screen.getByText(q.category)).toBeInTheDocument();
+      expect(
+        screen.getByText(`${i + 1} of ${cntQuestion}`)
+      ).toBeInTheDocument();
 
       const isClickYes = Math.random() < 0.5;
       fireEvent.click(isClickYes ? yesBtn : noBtn);
