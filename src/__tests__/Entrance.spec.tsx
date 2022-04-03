@@ -13,13 +13,13 @@ describe('<Entrance />', () => {
     );
   });
 
-  test('should display "BEGIN" link whose href if "/questions".', () => {
+  it('should display "BEGIN" link whose href if "/questions".', () => {
     const link = screen.getByText(/BEGIN/i);
     expect(link).toBeInTheDocument();
     expect(link.closest('a')).toHaveAttribute('href', '/questions');
   });
 
-  test('should navigate to quiz page when click "BEGIN" link.', () => {
+  it('should navigate to quiz page when click "BEGIN" link.', () => {
     const link = screen.getByText(/BEGIN/i);
     fireEvent.click(link);
     expect(window.location.pathname).toBe('/questions');
